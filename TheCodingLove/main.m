@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ADBAppDelegate.h"
+#import "TCLAppDelegate.h"
 
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([ADBAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([TCLAppDelegate class]));
     }
 }

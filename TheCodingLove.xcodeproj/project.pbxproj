@@ -7,20 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14515FBC09A14C48AE0C9F77 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21EAC06DB1FC43B5AA2CF324 /* libPods.a */; };
 		D30FD16F18721DD400711849 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30FD16E18721DD400711849 /* Foundation.framework */; };
 		D30FD17118721DD400711849 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30FD17018721DD400711849 /* CoreGraphics.framework */; };
 		D30FD17318721DD400711849 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30FD17218721DD400711849 /* UIKit.framework */; };
 		D30FD17918721DD400711849 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D30FD17718721DD400711849 /* InfoPlist.strings */; };
 		D30FD17B18721DD400711849 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D30FD17A18721DD400711849 /* main.m */; };
-		D30FD17F18721DD400711849 /* ADBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D30FD17E18721DD400711849 /* ADBAppDelegate.m */; };
-		D30FD18218721DD400711849 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D30FD18018721DD400711849 /* Main.storyboard */; };
-		D30FD18518721DD400711849 /* ADBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D30FD18418721DD400711849 /* ADBViewController.m */; };
+		D30FD17F18721DD400711849 /* TCLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D30FD17E18721DD400711849 /* TCLAppDelegate.m */; };
+		D30FD18518721DD400711849 /* TCLTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D30FD18418721DD400711849 /* TCLTableViewController.m */; };
 		D30FD18718721DD400711849 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D30FD18618721DD400711849 /* Images.xcassets */; };
 		D30FD18E18721DD400711849 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30FD18D18721DD400711849 /* XCTest.framework */; };
 		D30FD18F18721DD400711849 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30FD16E18721DD400711849 /* Foundation.framework */; };
 		D30FD19018721DD400711849 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30FD17218721DD400711849 /* UIKit.framework */; };
 		D30FD19818721DD400711849 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D30FD19618721DD400711849 /* InfoPlist.strings */; };
 		D30FD19A18721DD400711849 /* TheCodingLoveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D30FD19918721DD400711849 /* TheCodingLoveTests.m */; };
+		D30FD1B8187226B800711849 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = D30FD1B3187226B800711849 /* TFHpple.m */; };
+		D30FD1B9187226B800711849 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = D30FD1B5187226B800711849 /* TFHppleElement.m */; };
+		D30FD1BA187226B800711849 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D30FD1B7187226B800711849 /* XPathQuery.m */; };
+		D30FD1BC1872273700711849 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D30FD1BB1872273700711849 /* libxml2.dylib */; };
+		D30FD1C018722A9F00711849 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = D30FD1BF18722A9F00711849 /* UIImage+animatedGIF.m */; };
+		D30FD1C218722B1200711849 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30FD1C118722B1200711849 /* ImageIO.framework */; };
+		D30FD1C418722BF800711849 /* TCLTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D30FD1C318722BF800711849 /* TCLTableViewController.xib */; };
+		D30FD1C9187470D600711849 /* TCLEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = D30FD1C8187470D600711849 /* TCLEntry.m */; };
+		D30FD1CD18747E3F00711849 /* TCLTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D30FD1CC18747E3F00711849 /* TCLTableViewCell.m */; };
+		D30FD1CF18747E4F00711849 /* TCLTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D30FD1CE18747E4F00711849 /* TCLTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		21EAC06DB1FC43B5AA2CF324 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D30FD16B18721DD400711849 /* TheCodingLove.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheCodingLove.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D30FD16E18721DD400711849 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D30FD17018721DD400711849 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -42,17 +53,33 @@
 		D30FD17818721DD400711849 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D30FD17A18721DD400711849 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D30FD17C18721DD400711849 /* TheCodingLove-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheCodingLove-Prefix.pch"; sourceTree = "<group>"; };
-		D30FD17D18721DD400711849 /* ADBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADBAppDelegate.h; sourceTree = "<group>"; };
-		D30FD17E18721DD400711849 /* ADBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADBAppDelegate.m; sourceTree = "<group>"; };
-		D30FD18118721DD400711849 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D30FD18318721DD400711849 /* ADBViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADBViewController.h; sourceTree = "<group>"; };
-		D30FD18418721DD400711849 /* ADBViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADBViewController.m; sourceTree = "<group>"; };
+		D30FD17D18721DD400711849 /* TCLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCLAppDelegate.h; sourceTree = "<group>"; };
+		D30FD17E18721DD400711849 /* TCLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCLAppDelegate.m; sourceTree = "<group>"; };
+		D30FD18318721DD400711849 /* TCLTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCLTableViewController.h; sourceTree = "<group>"; };
+		D30FD18418721DD400711849 /* TCLTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCLTableViewController.m; sourceTree = "<group>"; };
 		D30FD18618721DD400711849 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D30FD18C18721DD400711849 /* TheCodingLoveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheCodingLoveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D30FD18D18721DD400711849 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		D30FD19518721DD400711849 /* TheCodingLoveTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TheCodingLoveTests-Info.plist"; sourceTree = "<group>"; };
 		D30FD19718721DD400711849 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D30FD19918721DD400711849 /* TheCodingLoveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TheCodingLoveTests.m; sourceTree = "<group>"; };
+		D30FD1B2187226B800711849 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
+		D30FD1B3187226B800711849 /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
+		D30FD1B4187226B800711849 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
+		D30FD1B5187226B800711849 /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
+		D30FD1B6187226B800711849 /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
+		D30FD1B7187226B800711849 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
+		D30FD1BB1872273700711849 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		D30FD1BE18722A9F00711849 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
+		D30FD1BF18722A9F00711849 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
+		D30FD1C118722B1200711849 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		D30FD1C318722BF800711849 /* TCLTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TCLTableViewController.xib; sourceTree = "<group>"; };
+		D30FD1C7187470D600711849 /* TCLEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCLEntry.h; sourceTree = "<group>"; };
+		D30FD1C8187470D600711849 /* TCLEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCLEntry.m; sourceTree = "<group>"; };
+		D30FD1CB18747E3F00711849 /* TCLTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCLTableViewCell.h; sourceTree = "<group>"; };
+		D30FD1CC18747E3F00711849 /* TCLTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCLTableViewCell.m; sourceTree = "<group>"; };
+		D30FD1CE18747E4F00711849 /* TCLTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TCLTableViewCell.xib; sourceTree = "<group>"; };
+		D4534E4C728C436D8EC52677 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +87,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D30FD1C218722B1200711849 /* ImageIO.framework in Frameworks */,
 				D30FD17118721DD400711849 /* CoreGraphics.framework in Frameworks */,
 				D30FD17318721DD400711849 /* UIKit.framework in Frameworks */,
 				D30FD16F18721DD400711849 /* Foundation.framework in Frameworks */,
+				D30FD1BC1872273700711849 /* libxml2.dylib in Frameworks */,
+				14515FBC09A14C48AE0C9F77 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +116,7 @@
 				D30FD19318721DD400711849 /* TheCodingLoveTests */,
 				D30FD16D18721DD400711849 /* Frameworks */,
 				D30FD16C18721DD400711849 /* Products */,
+				D4534E4C728C436D8EC52677 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,10 +132,13 @@
 		D30FD16D18721DD400711849 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D30FD1C118722B1200711849 /* ImageIO.framework */,
+				D30FD1BB1872273700711849 /* libxml2.dylib */,
 				D30FD16E18721DD400711849 /* Foundation.framework */,
 				D30FD17018721DD400711849 /* CoreGraphics.framework */,
 				D30FD17218721DD400711849 /* UIKit.framework */,
 				D30FD18D18721DD400711849 /* XCTest.framework */,
+				21EAC06DB1FC43B5AA2CF324 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -112,11 +146,12 @@
 		D30FD17418721DD400711849 /* TheCodingLove */ = {
 			isa = PBXGroup;
 			children = (
-				D30FD17D18721DD400711849 /* ADBAppDelegate.h */,
-				D30FD17E18721DD400711849 /* ADBAppDelegate.m */,
-				D30FD18018721DD400711849 /* Main.storyboard */,
-				D30FD18318721DD400711849 /* ADBViewController.h */,
-				D30FD18418721DD400711849 /* ADBViewController.m */,
+				D30FD1BD18722A9F00711849 /* animatedGIF */,
+				D30FD1B1187226B800711849 /* hpple */,
+				D30FD1D21874819200711849 /* AppDelegate */,
+				D30FD1CA18747CC400711849 /* Model */,
+				D30FD1D01874818300711849 /* View */,
+				D30FD1D11874818900711849 /* Controller */,
 				D30FD18618721DD400711849 /* Images.xcassets */,
 				D30FD17518721DD400711849 /* Supporting Files */,
 			);
@@ -152,6 +187,66 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D30FD1B1187226B800711849 /* hpple */ = {
+			isa = PBXGroup;
+			children = (
+				D30FD1B2187226B800711849 /* TFHpple.h */,
+				D30FD1B3187226B800711849 /* TFHpple.m */,
+				D30FD1B4187226B800711849 /* TFHppleElement.h */,
+				D30FD1B5187226B800711849 /* TFHppleElement.m */,
+				D30FD1B6187226B800711849 /* XPathQuery.h */,
+				D30FD1B7187226B800711849 /* XPathQuery.m */,
+			);
+			path = hpple;
+			sourceTree = "<group>";
+		};
+		D30FD1BD18722A9F00711849 /* animatedGIF */ = {
+			isa = PBXGroup;
+			children = (
+				D30FD1BE18722A9F00711849 /* UIImage+animatedGIF.h */,
+				D30FD1BF18722A9F00711849 /* UIImage+animatedGIF.m */,
+			);
+			path = animatedGIF;
+			sourceTree = "<group>";
+		};
+		D30FD1CA18747CC400711849 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D30FD1C7187470D600711849 /* TCLEntry.h */,
+				D30FD1C8187470D600711849 /* TCLEntry.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D30FD1D01874818300711849 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D30FD1CB18747E3F00711849 /* TCLTableViewCell.h */,
+				D30FD1CC18747E3F00711849 /* TCLTableViewCell.m */,
+				D30FD1CE18747E4F00711849 /* TCLTableViewCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		D30FD1D11874818900711849 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D30FD18318721DD400711849 /* TCLTableViewController.h */,
+				D30FD18418721DD400711849 /* TCLTableViewController.m */,
+				D30FD1C318722BF800711849 /* TCLTableViewController.xib */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		D30FD1D21874819200711849 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				D30FD17D18721DD400711849 /* TCLAppDelegate.h */,
+				D30FD17E18721DD400711849 /* TCLAppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -159,9 +254,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D30FD19D18721DD400711849 /* Build configuration list for PBXNativeTarget "TheCodingLove" */;
 			buildPhases = (
+				39C073ACE2824FA1BFF73FBB /* Check Pods Manifest.lock */,
 				D30FD16718721DD400711849 /* Sources */,
 				D30FD16818721DD400711849 /* Frameworks */,
 				D30FD16918721DD400711849 /* Resources */,
+				283D86473E234DF2BC8EFEBD /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -229,9 +326,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D30FD1C418722BF800711849 /* TCLTableViewController.xib in Resources */,
 				D30FD18718721DD400711849 /* Images.xcassets in Resources */,
 				D30FD17918721DD400711849 /* InfoPlist.strings in Resources */,
-				D30FD18218721DD400711849 /* Main.storyboard in Resources */,
+				D30FD1CF18747E4F00711849 /* TCLTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,14 +343,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		283D86473E234DF2BC8EFEBD /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		39C073ACE2824FA1BFF73FBB /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D30FD16718721DD400711849 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D30FD17F18721DD400711849 /* ADBAppDelegate.m in Sources */,
+				D30FD17F18721DD400711849 /* TCLAppDelegate.m in Sources */,
 				D30FD17B18721DD400711849 /* main.m in Sources */,
-				D30FD18518721DD400711849 /* ADBViewController.m in Sources */,
+				D30FD1C9187470D600711849 /* TCLEntry.m in Sources */,
+				D30FD18518721DD400711849 /* TCLTableViewController.m in Sources */,
+				D30FD1B8187226B800711849 /* TFHpple.m in Sources */,
+				D30FD1BA187226B800711849 /* XPathQuery.m in Sources */,
+				D30FD1CD18747E3F00711849 /* TCLTableViewCell.m in Sources */,
+				D30FD1B9187226B800711849 /* TFHppleElement.m in Sources */,
+				D30FD1C018722A9F00711849 /* UIImage+animatedGIF.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,14 +418,6 @@
 				D30FD17818721DD400711849 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		D30FD18018721DD400711849 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D30FD18118721DD400711849 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		D30FD19618721DD400711849 /* InfoPlist.strings */ = {
@@ -376,12 +505,19 @@
 		};
 		D30FD19E18721DD400711849 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4534E4C728C436D8EC52677 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TheCodingLove/TheCodingLove-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "TheCodingLove/TheCodingLove-Info.plist";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -389,12 +525,19 @@
 		};
 		D30FD19F18721DD400711849 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4534E4C728C436D8EC52677 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TheCodingLove/TheCodingLove-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "TheCodingLove/TheCodingLove-Info.plist";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -461,6 +604,7 @@
 				D30FD19F18721DD400711849 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D30FD1A018721DD400711849 /* Build configuration list for PBXNativeTarget "TheCodingLoveTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +613,7 @@
 				D30FD1A218721DD400711849 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

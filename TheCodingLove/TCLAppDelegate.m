@@ -6,13 +6,22 @@
 //  Copyright (c) 2013 Alberto De Bortoli. All rights reserved.
 //
 
-#import "ADBAppDelegate.h"
+#import "TCLAppDelegate.h"
+#import "TCLTableViewController.h"
 
-@implementation ADBAppDelegate
+@implementation TCLAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    TCLTableViewController *viewController = [[TCLTableViewController alloc] initWithNibName:@"TCLTableViewController" bundle:nil];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = viewController;
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 							

@@ -1,5 +1,5 @@
 //
-//  ADBViewController.h
+//  TCLTableViewController.h
 //  TheCodingLove
 //
 //  Created by Alberto De Bortoli on 30/12/2013.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ADBViewController : UIViewController
+@interface TCLTableViewController : UITableViewController
 
 @end
