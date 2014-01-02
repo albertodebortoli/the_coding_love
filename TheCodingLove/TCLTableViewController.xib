@@ -15,6 +15,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ox4-4n-hnp">
+                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <state key="normal" title="Moar">
+                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                </state>
+                <connections>
+                    <action selector="loadMore:" destination="-1" eventType="touchUpInside" id="zjh-9y-Juz"/>
+                </connections>
+            </button>
             <connections>
                 <outlet property="dataSource" destination="-1" id="0gl-Vm-6hf"/>
                 <outlet property="delegate" destination="-1" id="Qv9-P0-kDr"/>

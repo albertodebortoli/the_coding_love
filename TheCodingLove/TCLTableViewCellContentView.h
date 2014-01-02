@@ -1,5 +1,5 @@
 //
-//  TCLTableViewCell.h
+//  TCLTableViewCellContentView.h
 //  TheCodingLove
 //
 //  Created by Alberto De Bortoli on 01/01/2014.
@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TCLTableViewCell : UITableViewCell
+static CGFloat kTCLTableViewCellContentViewImagePadding = 80.0f;
+
+@interface TCLTableViewCellContentView : UIView
 
 @property (nonatomic, weak) IBOutlet UIImageView *entryImageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *authorLabel;
+
+- (void)setTitle:(NSString *)title image:(UIImage *)image author:(NSString *)author;
 
 @end
