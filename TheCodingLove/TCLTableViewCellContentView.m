@@ -8,6 +8,8 @@
 
 #import "TCLTableViewCellContentView.h"
 
+const CGFloat kTCLTableViewCellContentViewImagePadding = 80.0f;
+
 @implementation TCLTableViewCellContentView
 
 - (void)setTitle:(NSString *)title image:(UIImage *)image
@@ -19,7 +21,12 @@
     CGFloat x = (320.0 * image.size.height) / image.size.width;
     frame.size.height = x + kTCLTableViewCellContentViewImagePadding;
     self.frame = frame;
-    NSLog(@"[tcl content view cell] image height %f", x);
+//    NSLog(@"[tcl content view cell] image height %f", x);
+}
+
+- (void)setImage:(UIImage *)image
+{
+    self.entryImageView.image = image;    
 }
 
 @end

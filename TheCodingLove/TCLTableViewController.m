@@ -8,10 +8,11 @@
 
 #import "TCLTableViewController.h"
 
-#import "TCLTableViewCellContentView.h"
+#import "TCLInfoViewController.h"
+#import "TCLTableViewCell.h"
 #import "TCLEntry.h"
 
-#import "AFNetworkReachabilityManager.h"
+#import "Reachability.h"
 #import "TFHpple.h"
 #import "UIImage+animatedGIF.h"
 
@@ -27,7 +28,7 @@ static NSInteger const kTCLMissingNodeErrorCode = -1001;
 
 @property (nonatomic, strong) NSMutableArray *entries;
 @property (nonatomic, assign) NSUInteger counter;
-@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -35,7 +36,8 @@ static NSInteger const kTCLMissingNodeErrorCode = -1001;
 {
     dispatch_queue_t _htmlFetcherWorkingQueue;
     dispatch_queue_t _dataFetcherWorkingQueue;
-    dispatch_semaphore_t _semaphore;
+//    dispatch_semaphore_t _refreshSemaphore;
+    dispatch_semaphore_t _loadNextSemaphore;
 }
 
 #pragma mark - UIViewController life cycle
@@ -48,33 +50,31 @@ static NSInteger const kTCLMissingNodeErrorCode = -1001;
     
     _htmlFetcherWorkingQueue = dispatch_queue_create("com.albertodebortoli.thecodinglove.fetcher.html", NULL);
     _dataFetcherWorkingQueue = dispatch_queue_create("com.albertodebortoli.thecodinglove.fetcher.data", NULL);
-    _semaphore = dispatch_semaphore_create(1);
+//    _refreshSemaphore = dispatch_semaphore_create(1);
+    _loadNextSemaphore = dispatch_semaphore_create(1);
     
     self.entries = [NSMutableArray array];
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
-    
     self.counter = 0;
     
-    [self _loadNextPage];
+//    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+//    [refresh addTarget:self action:@selector(refreshView:) forControlEvents:UIControlEventValueChanged];
+//    self.refreshControl = refresh;
+    
+    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    [infoButton addTarget:self action:@selector(showInfo) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
+    self.navigationItem.leftBarButtonItem = bbi;
+    
+    [self.activityIndicator startAnimating];
+    
+    [self _loadNextPageCompletion:nil];
 }
 
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"[call] heightForRowAtIndexPath (%@)", indexPath);
-    
     TCLEntry *entry = self.entries[indexPath.row];
-    
-    if (entry.size.height == 0 && entry.size.width == 0) {
-        NSLog(@"[call] heightForRowAtIndexPath (calculating height...)");
-        UIImage *image = [UIImage imageWithData:entry.data];
-        entry.size = image.size;
-    }
-    else {
-        NSLog(@"[call] heightForRowAtIndexPath (height previously cached...)");
-    }
     
     // example: 100x20
     // resized: 100 : 20 = 320 : x
@@ -82,7 +82,6 @@ static NSInteger const kTCLMissingNodeErrorCode = -1001;
     
     CGFloat x = (320.0 * entry.size.height) / entry.size.width;
     x += kTCLTableViewCellContentViewImagePadding;
-    NSLog(@"[call] heightForRowAtIndexPath (height is %f)", x);
     
     return x;
 }
@@ -90,7 +89,7 @@ static NSInteger const kTCLMissingNodeErrorCode = -1001;
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == [self.entries count] - 1) {
-        [self _loadNextPage];
+        [self _loadNextPageCompletion:nil];
     }
 }
 
@@ -103,28 +102,29 @@ static NSInteger const kTCLMissingNodeErrorCode = -1001;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"[call] cellForRow (%@)", indexPath);
-
     static NSString *cellReuseId = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseId];
+    TCLTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseId];
     TCLTableViewCellContentView *customContentView = nil;
     
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseId];
+        cell = [[TCLTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellReuseId];
         customContentView = [[NSBundle mainBundle] loadNibNamed:@"TCLTableViewCellContentView" owner:self options:nil][0];
+        [cell setCustomContentView:customContentView];
         [cell.contentView addSubview:customContentView];
     }
     else {
         customContentView = cell.contentView.subviews[0];
+        [NSObject cancelPreviousPerformRequestsWithTarget:cell];
     }
     
     TCLEntry *entry = self.entries[indexPath.row];
     
     dispatch_queue_t bkg_queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(bkg_queue, ^{
-        UIImage *img = [UIImage animatedImageWithAnimatedGIFData:entry.data];
+        UIImage *img = [UIImage imageWithData:entry.data];
         dispatch_async(dispatch_get_main_queue(), ^{
             [customContentView setTitle:entry.title image:img];
+            [cell performSelector:@selector(loadAnimatedGIF:) withObject:entry afterDelay:1.0f];
         });
     });
     
@@ -133,10 +133,27 @@ static NSInteger const kTCLMissingNodeErrorCode = -1001;
 
 #pragma mark - Actions
 
-- (IBAction)loadMore:(id)sender
+- (void)showInfo
 {
-    [self _loadNextPage];
+    TCLInfoViewController *infoViewController = [[TCLInfoViewController alloc] initWithNibName:@"TCLInfoViewController" bundle:nil];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:infoViewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
+
+//- (void)refreshView:(UIRefreshControl *)refresh
+//{
+//    self.counter = 0;
+//    [self.entries removeAllObjects];
+//    [self.tableView reloadData];
+//    
+//    [self _loadNextPageCompletion:nil];
+//    
+////    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+////    [formatter setDateFormat:@"MMM d, h:mm a"];
+////    NSString *lastUpdated = [NSString stringWithFormat:@"Last updated on %@", [formatter stringFromDate:[NSDate date]]];
+////    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:lastUpdated];
+//    [refresh endRefreshing];
+//}
 
 #pragma mark - Private Methods
 
@@ -155,11 +172,15 @@ static NSInteger const kTCLMissingNodeErrorCode = -1001;
     }
     
     // 1. create the url and retrieve the data
-    NSLog(@"[tcl] fetching HTML page (%i)", index);
-    NSString *urlString = [NSString stringWithFormat:@"%@/page/%i", kTCLBaseURL, index];
+    NSLog(@"[tcl] fetching HTML page (%lu)", (unsigned long)index);
+    NSString *urlString = [NSString stringWithFormat:@"%@/page/%lu", kTCLBaseURL, (unsigned long)index];
     NSURL *tutorialsUrl = [NSURL URLWithString:urlString];
-    NSData *htmlData = [NSData dataWithContentsOfURL:tutorialsUrl];
-    NSLog(@"[tcl] fetched HTML page (%i)", index);
+    NSError *error = nil;
+    NSData *htmlData = [NSData dataWithContentsOfURL:tutorialsUrl options:kNilOptions error:&error];
+    if (!htmlData) {
+        // check error...
+    }
+    NSLog(@"[tcl] fetched HTML page (%lu) (size %lu)", (unsigned long)index, (unsigned long)htmlData.length);
 
     // 2. create the parser and search using a XPath query
     TFHpple *tutorialsParser = [TFHpple hppleWithHTMLData:htmlData];
@@ -213,13 +234,19 @@ static NSInteger const kTCLMissingNodeErrorCode = -1001;
     
     NSLog(@"[tcl] fetching image data (%@)", entry.url);
     NSURL *url = [NSURL URLWithString:entry.url];
-    NSData *data = [NSData dataWithContentsOfURL:url];
+    
+    NSError *error = nil;
+    NSData *data = [NSData dataWithContentsOfURL:url options:kNilOptions error:&error];
+    if (!data) {
+        // check error...
+    }
+    
     UIImage *image = [UIImage imageWithData:data];
     
     entry.size = image.size;
     entry.data = data;
     
-    NSLog(@"[tcl] fetched data (%@)", entry.url);
+    NSLog(@"[tcl] fetched data (%@) (size %lu)", entry.url, (unsigned long)data.length);
     
     if (completion) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -228,121 +255,167 @@ static NSInteger const kTCLMissingNodeErrorCode = -1001;
     }
 }
 
-- (void)_refresh
-{
-    dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1ull * NSEC_PER_SEC);
-    long result = dispatch_semaphore_wait(_semaphore, time);
-    
-    if (result == 0) {
-        
-        [self.activityIndicator startAnimating];
-        
-        void (^terminationBlock)(void) = ^{
-            [self.activityIndicator stopAnimating];
-            dispatch_semaphore_signal(_semaphore);
-        };
-        
-        
-        void (^networkFailureBlock)(void) = ^{
-            [self.activityIndicator stopAnimating];
-            dispatch_semaphore_signal(_semaphore);
-            [self _showNetworkConnectivityErrorAlert];
-        };
-        
-        dispatch_async(_htmlFetcherWorkingQueue, ^{
-            [self _fetchInfoForPageAtIndex:1 completion:^(NSArray *entries) {
-                NSEnumerator *enumerator = [entries reverseObjectEnumerator];
-                
-                TCLEntry *entry = nil;
-                while (entry = [enumerator nextObject]) {
-                    if ([self.entries containsObject:entry] == NO) {
-                        dispatch_async(_dataFetcherWorkingQueue, ^{
-                            [self _fetchDataForEntry:entry completion:^(TCLEntry *populatedEntry) {
-                                [self.entries insertObject:populatedEntry atIndex:0];
-                                
-                                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-                                [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-                                
-                                if ([entry isEqual:[entries lastObject]]) {
-                                    terminationBlock();
-                                }
-                            } failure:^(NSError *error) {
-                                switch (error.code) {
-                                    case kTCLInternetConnectivityMissingErrorCode:
-                                        networkFailureBlock();
-                                        break;
-                                    case kTCLMissingNodeErrorCode:
-                                        [self _showTumblrScrapingErrorAlert];
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }];
-                        });
-                    }
-                }
-            } failure:^(NSError *error) {
-                networkFailureBlock();
-            }];
-        });
-    }
-}
+//- (void)_refreshCompletion:(void(^)(void))completion
+//{
+//    dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1ull * NSEC_PER_SEC);
+//    long result = dispatch_semaphore_wait(_refreshSemaphore, time);
+//    
+//    if (result == 0) {
+//        
+//        void (^terminationBlock)(void) = ^{
+//            dispatch_semaphore_signal(_refreshSemaphore);
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                if (completion) {
+//                    completion();
+//                }
+//            });
+//        };
+//        
+//        void (^networkFailureBlock)(void) = ^{
+//            dispatch_semaphore_signal(_refreshSemaphore);
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self _showNetworkConnectivityErrorAlert];
+//                if (completion) {
+//                    completion();
+//                }
+//            });
+//        };
+//        
+//        void (^scrapingErrorBlock)(void) = ^{
+//            dispatch_semaphore_signal(_refreshSemaphore);
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self _showTumblrScrapingErrorAlert];
+//                if (completion) {
+//                    completion();
+//                }
+//            });
+//        };
+//        
+//        dispatch_async(_htmlFetcherWorkingQueue, ^{
+//            [self _fetchInfoForPageAtIndex:1 completion:^(NSArray *entries) {
+//                
+//                // TODO: now it's just for page #1
+//                NSMutableArray *newEntries = [entries mutableCopy];
+//                [newEntries removeObjectsInArray:self.entries];
+//                
+//                if ([newEntries count] == 0) {
+//                    terminationBlock();
+//                    return;
+//                }
+//                
+//                NSEnumerator *enumerator = [newEntries reverseObjectEnumerator];
+//                
+//                TCLEntry *entry = nil;
+//                while (entry = [enumerator nextObject]) {
+//                    dispatch_async(_dataFetcherWorkingQueue, ^{
+//                        [self _fetchDataForEntry:entry completion:^(TCLEntry *populatedEntry) {
+//                            [self.entries insertObject:populatedEntry atIndex:0];
+//                            
+//                            if ([entry isEqual:[newEntries firstObject]]) {
+//                                terminationBlock();
+//                            }
+//
+//                            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+//                            [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//                            
+//                        } failure:^(NSError *error) {
+//                            switch (error.code) {
+//                                case kTCLInternetConnectivityMissingErrorCode:
+//                                    networkFailureBlock();
+//                                    break;
+//                                default:
+//                                    terminationBlock();
+//                                    break;
+//                            }
+//                        }];
+//                    });
+//                }
+//            } failure:^(NSError *error) {
+//                switch (error.code) {
+//                    case kTCLInternetConnectivityMissingErrorCode:
+//                        networkFailureBlock();
+//                        break;
+//                    case kTCLMissingNodeErrorCode:
+//                        scrapingErrorBlock();
+//                        break;
+//                    default:
+//                        terminationBlock();
+//                        break;
+//                }
+//            }];
+//        });
+//    }
+//}
 
-- (void)_loadNextPage
+- (void)_loadNextPageCompletion:(void(^)(void))completion
 {
     dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 1ull * NSEC_PER_SEC);
-    long result = dispatch_semaphore_wait(_semaphore, time);
+    long result = dispatch_semaphore_wait(_loadNextSemaphore, time);
     
     if (result == 0) {
         
         self.counter++;
         
-        [self.activityIndicator startAnimating];
-        
         void (^terminationBlock)(void) = ^{
-            [self.activityIndicator stopAnimating];
-            dispatch_semaphore_signal(_semaphore);
+            dispatch_semaphore_signal(_loadNextSemaphore);
         };
         
         
         void (^networkFailureBlock)(void) = ^{
-            [self.activityIndicator stopAnimating];
-            dispatch_semaphore_signal(_semaphore);
-            [self _showNetworkConnectivityErrorAlert];
+            dispatch_semaphore_signal(_loadNextSemaphore);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self _showNetworkConnectivityErrorAlert];
+            });
+        };
+        
+        void (^scrapingErrorBlock)(void) = ^{
+            dispatch_semaphore_signal(_loadNextSemaphore);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self _showTumblrScrapingErrorAlert];
+                if (completion) {
+                    completion();
+                }
+            });
         };
         
         dispatch_async(_htmlFetcherWorkingQueue, ^{
             [self _fetchInfoForPageAtIndex:self.counter completion:^(NSArray *entries) {
-                NSEnumerator *enumerator = [entries objectEnumerator];
-                
-                TCLEntry *entry = nil;
-                while (entry = [enumerator nextObject]) {
+                for (TCLEntry *entry in entries) {
                     dispatch_async(_dataFetcherWorkingQueue, ^{
                         [self _fetchDataForEntry:entry completion:^(TCLEntry *populatedEntry) {
                             [self.entries addObject:populatedEntry];
                             
-                            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.entries count] - 1 inSection:0];
-                            [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-                            
                             if ([entry isEqual:[entries lastObject]]) {
                                 terminationBlock();
                             }
+                        
+                            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.entries count] - 1 inSection:0];
+                            [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+
                         } failure:^(NSError *error) {
                             switch (error.code) {
                                 case kTCLInternetConnectivityMissingErrorCode:
                                     networkFailureBlock();
                                     break;
-                                case kTCLMissingNodeErrorCode:
-                                    [self _showTumblrScrapingErrorAlert];
-                                    break;
                                 default:
+                                    terminationBlock();
                                     break;
                             }
                         }];
                     });
                 };
             } failure:^(NSError *error) {
-                networkFailureBlock();
+                switch (error.code) {
+                    case kTCLInternetConnectivityMissingErrorCode:
+                        networkFailureBlock();
+                        break;
+                    case kTCLMissingNodeErrorCode:
+                        scrapingErrorBlock();
+                        break;
+                    default:
+                        terminationBlock();
+                        break;
+                }
             }];
         });
     }
@@ -350,8 +423,8 @@ static NSInteger const kTCLMissingNodeErrorCode = -1001;
 
 - (BOOL)_checkReachability
 {
-    return YES;
-    return [[AFNetworkReachabilityManager sharedManager] isReachable];
+    Reachability *reach = [Reachability reachabilityForInternetConnection];
+    return (reach.currentReachabilityStatus != NotReachable);
 }
 
 - (void)_showNetworkConnectivityErrorAlert

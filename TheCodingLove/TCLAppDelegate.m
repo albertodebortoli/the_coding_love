@@ -11,9 +11,19 @@
 
 @implementation TCLAppDelegate
 
+- (void)_customizeAppearance
+{
+    [[UINavigationBar appearance] setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIColor blackColor], NSForegroundColorAttributeName,
+      [UIFont fontWithName:@"CourierNewPS-BoldMT" size:16.0], NSFontAttributeName, nil]];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    [self _customizeAppearance];
     
     TCLTableViewController *viewController = [[TCLTableViewController alloc] initWithNibName:@"TCLTableViewController" bundle:nil];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-static CGFloat kTCLTableViewCellContentViewImagePadding = 80.0f;
+extern const CGFloat kTCLTableViewCellContentViewImagePadding;
 
 @interface TCLTableViewCellContentView : UIView
 
@@ -16,5 +16,6 @@ static CGFloat kTCLTableViewCellContentViewImagePadding = 80.0f;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 
 - (void)setTitle:(NSString *)title image:(UIImage *)image;
+- (void)setImage:(UIImage *)image;
 
 @end

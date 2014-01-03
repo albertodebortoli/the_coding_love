@@ -31,6 +31,10 @@
 		D30FD1C9187470D600711849 /* TCLEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = D30FD1C8187470D600711849 /* TCLEntry.m */; };
 		D30FD1CD18747E3F00711849 /* TCLTableViewCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D30FD1CC18747E3F00711849 /* TCLTableViewCellContentView.m */; };
 		D30FD1CF18747E4F00711849 /* TCLTableViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D30FD1CE18747E4F00711849 /* TCLTableViewCellContentView.xib */; };
+		D3C0B5C41876E76D00E29ED0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C0B5C31876E76D00E29ED0 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D3C0B5C71876F2DD00E29ED0 /* TCLTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C0B5C61876F2DD00E29ED0 /* TCLTableViewCell.m */; };
+		D3C0B5CA18770FEC00E29ED0 /* TCLInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C0B5C918770FEC00E29ED0 /* TCLInfoViewController.m */; };
+		D3C0B5CC18770FF800E29ED0 /* TCLInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3C0B5CB18770FF800E29ED0 /* TCLInfoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +83,13 @@
 		D30FD1CB18747E3F00711849 /* TCLTableViewCellContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCLTableViewCellContentView.h; sourceTree = "<group>"; };
 		D30FD1CC18747E3F00711849 /* TCLTableViewCellContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCLTableViewCellContentView.m; sourceTree = "<group>"; };
 		D30FD1CE18747E4F00711849 /* TCLTableViewCellContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TCLTableViewCellContentView.xib; sourceTree = "<group>"; };
+		D3C0B5C21876E76D00E29ED0 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		D3C0B5C31876E76D00E29ED0 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		D3C0B5C51876F2DD00E29ED0 /* TCLTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCLTableViewCell.h; sourceTree = "<group>"; };
+		D3C0B5C61876F2DD00E29ED0 /* TCLTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCLTableViewCell.m; sourceTree = "<group>"; };
+		D3C0B5C818770FEC00E29ED0 /* TCLInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCLInfoViewController.h; sourceTree = "<group>"; };
+		D3C0B5C918770FEC00E29ED0 /* TCLInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCLInfoViewController.m; sourceTree = "<group>"; };
+		D3C0B5CB18770FF800E29ED0 /* TCLInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TCLInfoViewController.xib; sourceTree = "<group>"; };
 		D4534E4C728C436D8EC52677 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,6 +157,7 @@
 		D30FD17418721DD400711849 /* TheCodingLove */ = {
 			isa = PBXGroup;
 			children = (
+				D3C0B5C11876E76D00E29ED0 /* Reachability */,
 				D30FD1BD18722A9F00711849 /* animatedGIF */,
 				D30FD1B1187226B800711849 /* hpple */,
 				D30FD1D21874819200711849 /* AppDelegate */,
@@ -224,6 +236,8 @@
 				D30FD1CB18747E3F00711849 /* TCLTableViewCellContentView.h */,
 				D30FD1CC18747E3F00711849 /* TCLTableViewCellContentView.m */,
 				D30FD1CE18747E4F00711849 /* TCLTableViewCellContentView.xib */,
+				D3C0B5C51876F2DD00E29ED0 /* TCLTableViewCell.h */,
+				D3C0B5C61876F2DD00E29ED0 /* TCLTableViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -234,6 +248,9 @@
 				D30FD18318721DD400711849 /* TCLTableViewController.h */,
 				D30FD18418721DD400711849 /* TCLTableViewController.m */,
 				D30FD1C318722BF800711849 /* TCLTableViewController.xib */,
+				D3C0B5C818770FEC00E29ED0 /* TCLInfoViewController.h */,
+				D3C0B5C918770FEC00E29ED0 /* TCLInfoViewController.m */,
+				D3C0B5CB18770FF800E29ED0 /* TCLInfoViewController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -245,6 +262,15 @@
 				D30FD17E18721DD400711849 /* TCLAppDelegate.m */,
 			);
 			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		D3C0B5C11876E76D00E29ED0 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				D3C0B5C21876E76D00E29ED0 /* Reachability.h */,
+				D3C0B5C31876E76D00E29ED0 /* Reachability.m */,
+			);
+			path = Reachability;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,6 +356,7 @@
 				D30FD18718721DD400711849 /* Images.xcassets in Resources */,
 				D30FD17918721DD400711849 /* InfoPlist.strings in Resources */,
 				D30FD1CF18747E4F00711849 /* TCLTableViewCellContentView.xib in Resources */,
+				D3C0B5CC18770FF800E29ED0 /* TCLInfoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,8 +412,11 @@
 				D30FD17B18721DD400711849 /* main.m in Sources */,
 				D30FD1C9187470D600711849 /* TCLEntry.m in Sources */,
 				D30FD18518721DD400711849 /* TCLTableViewController.m in Sources */,
+				D3C0B5C41876E76D00E29ED0 /* Reachability.m in Sources */,
 				D30FD1B8187226B800711849 /* TFHpple.m in Sources */,
 				D30FD1BA187226B800711849 /* XPathQuery.m in Sources */,
+				D3C0B5C71876F2DD00E29ED0 /* TCLTableViewCell.m in Sources */,
+				D3C0B5CA18770FEC00E29ED0 /* TCLInfoViewController.m in Sources */,
 				D30FD1CD18747E3F00711849 /* TCLTableViewCellContentView.m in Sources */,
 				D30FD1B9187226B800711849 /* TFHppleElement.m in Sources */,
 				D30FD1C018722A9F00711849 /* UIImage+animatedGIF.m in Sources */,
