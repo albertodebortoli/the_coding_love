@@ -27,4 +27,20 @@
     return YES;
 }
 
+- (BOOL)isEqual:(id)object
+{
+    if ([object class] == [self class]) {
+        if ([((TCLEntry *)object).url isEqualToString:self.url]) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+- (NSUInteger)hash
+{
+    return [self.url hash];
+}
+
 @end

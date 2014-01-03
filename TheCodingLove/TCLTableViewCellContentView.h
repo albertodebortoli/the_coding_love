@@ -14,8 +14,7 @@ static CGFloat kTCLTableViewCellContentViewImagePadding = 80.0f;
 
 @property (nonatomic, weak) IBOutlet UIImageView *entryImageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
-@property (nonatomic, weak) IBOutlet UILabel *authorLabel;
 
-- (void)setTitle:(NSString *)title image:(UIImage *)image author:(NSString *)author;
+- (void)setTitle:(NSString *)title image:(UIImage *)image;
 
 @end

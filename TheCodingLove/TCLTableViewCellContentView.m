@@ -10,7 +10,7 @@
 
 @implementation TCLTableViewCellContentView
 
-- (void)setTitle:(NSString *)title image:(UIImage *)image author:(NSString *)author
+- (void)setTitle:(NSString *)title image:(UIImage *)image
 {
     self.titleLabel.text = title;
 
@@ -20,8 +20,6 @@
     frame.size.height = x + kTCLTableViewCellContentViewImagePadding;
     self.frame = frame;
     NSLog(@"[tcl content view cell] image height %f", x);
-
-    self.authorLabel.text = author;
 }
 
 @end

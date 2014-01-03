@@ -11,7 +11,6 @@
 @interface TCLEntry : NSObject
 
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *author;
 @property (nonatomic, copy) NSString *url;
 @property (nonatomic, strong) NSData *data;
 @property (nonatomic, assign) CGSize size;

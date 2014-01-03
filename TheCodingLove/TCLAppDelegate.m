@@ -16,9 +16,10 @@
     // Override point for customization after application launch.
     
     TCLTableViewController *viewController = [[TCLTableViewController alloc] initWithNibName:@"TCLTableViewController" bundle:nil];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = viewController;
+    self.window.rootViewController = navigationController;
     
     [self.window makeKeyAndVisible];
     
